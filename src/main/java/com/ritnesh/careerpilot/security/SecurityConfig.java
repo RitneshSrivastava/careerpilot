@@ -13,9 +13,13 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
-                .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/users/register").permitAll()
+                .csrf(csrf -> csrf.disable()).authorizeHttpRequests(auth -> auth
+                        .requestMatchers(
+                                "/api/users/register",
+                                "/swagger-ui/**",
+                                "/api/users/login",
+                                "/v3/api-docs/**"
+                        ).permitAll()
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults());
