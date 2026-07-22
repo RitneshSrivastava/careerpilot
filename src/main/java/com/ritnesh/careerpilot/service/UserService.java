@@ -7,18 +7,18 @@ import com.ritnesh.careerpilot.exception.DuplicateEmailException;
 import com.ritnesh.careerpilot.exception.InvalidCredentialsException;
 import com.ritnesh.careerpilot.repository.UserRepository;
 import com.ritnesh.careerpilot.util.JwtUtil;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
-    private final BCryptPasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
 
     public UserService(UserRepository userRepository,
-                       BCryptPasswordEncoder passwordEncoder,
+                       PasswordEncoder passwordEncoder,
                        JwtUtil jwtUtil) {
 
         this.userRepository = userRepository;

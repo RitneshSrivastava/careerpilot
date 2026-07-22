@@ -36,4 +36,8 @@ public class UserController {
         return ResponseEntity.ok(userService.loginUser(request));
 
     }
+    @GetMapping("/profile")
+    public ResponseEntity<String> getProfile() {
+        return ResponseEntity.ok("Welcome to CareerPilot! JWT Authentication Successful.");
+    }
 }
