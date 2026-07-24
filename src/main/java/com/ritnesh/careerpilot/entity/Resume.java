@@ -24,6 +24,11 @@ public class Resume {
 
     private LocalDateTime uploadedAt;
 
+    private long fileSizeBytes;
+
+    @Column(nullable = false)
+    private boolean deleted = false;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;

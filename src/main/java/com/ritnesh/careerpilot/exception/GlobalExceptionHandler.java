@@ -22,4 +22,28 @@ public class GlobalExceptionHandler {
                 .body(ex.getMessage());
     }
 
+    @ExceptionHandler(ResumeNotFoundException.class)
+    public ResponseEntity<String> handleResumeNotFound(ResumeNotFoundException ex) {
+
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(ex.getMessage());
+    }
+
+    @ExceptionHandler(UnauthorizedResumeAccessException.class)
+    public ResponseEntity<String> handleUnauthorizedResumeAccess(UnauthorizedResumeAccessException ex) {
+
+        return ResponseEntity
+                .status(HttpStatus.FORBIDDEN)
+                .body(ex.getMessage());
+    }
+
+    @ExceptionHandler(InvalidFileException.class)
+    public ResponseEntity<String> handleInvalidFile(InvalidFileException ex) {
+
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(ex.getMessage());
+    }
+
 }
