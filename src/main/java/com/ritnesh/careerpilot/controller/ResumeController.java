@@ -1,9 +1,11 @@
 package com.ritnesh.careerpilot.controller;
 
 import com.ritnesh.careerpilot.dto.PagedResponse;
+import com.ritnesh.careerpilot.dto.ResumeAnalysisResponse;
 import com.ritnesh.careerpilot.dto.ResumeSummaryResponse;
 import com.ritnesh.careerpilot.dto.ResumeUploadResponse;
 import com.ritnesh.careerpilot.entity.Resume;
+import com.ritnesh.careerpilot.service.ResumeAnalysisService;
 import com.ritnesh.careerpilot.service.ResumeService;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
@@ -27,9 +29,12 @@ import java.net.URLEncoder;
 public class ResumeController {
 
     private final ResumeService resumeService;
+    private final ResumeAnalysisService resumeAnalysisService;
 
-    public ResumeController(ResumeService resumeService) {
+    public ResumeController(ResumeService resumeService,
+                             ResumeAnalysisService resumeAnalysisService) {
         this.resumeService = resumeService;
+        this.resumeAnalysisService = resumeAnalysisService;
     }
 
     @PostMapping(
@@ -111,5 +116,35 @@ public class ResumeController {
         ResumeUploadResponse response = resumeService.replaceResume(id, file, email);
 
         return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/{id}/analyze")
+    public ResponseEntity<ResumeAnalysisResponse> analyzeResume(
+            @PathVariable Long id,
+            Authentication authentication
+    ) {
+
+        String email = authentication.getName();
+
+        // ownership + existence check is reused from ResumeService, not duplicated here
+        Resume resume = resumeService.getDownloadableResume(id, email);
+
+        ResumeAnalysisResponse response = resumeAnalysisService.startAnalysis(resume);
+
+        return ResponseEntity.accepted().body(response);
+    }
+
+    @GetMapping("/{id}/analysis")
+    public ResponseEntity<ResumeAnalysisResponse> getAnalysis(
+            @PathVariable Long id,
+            Authentication authentication
+    ) {
+
+        String email = authentication.getName();
+
+        // confirms the resume exists and belongs to this user before revealing any analysis
+        resumeService.getDownloadableResume(id, email);
+
+        return ResponseEntity.ok(resumeAnalysisService.getAnalysis(id));
     }
 }

@@ -46,4 +46,20 @@ public class GlobalExceptionHandler {
                 .body(ex.getMessage());
     }
 
+    @ExceptionHandler(AnalysisNotFoundException.class)
+    public ResponseEntity<String> handleAnalysisNotFound(AnalysisNotFoundException ex) {
+
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(ex.getMessage());
+    }
+
+    @ExceptionHandler(AnalysisRateLimitException.class)
+    public ResponseEntity<String> handleAnalysisRateLimit(AnalysisRateLimitException ex) {
+
+        return ResponseEntity
+                .status(HttpStatus.TOO_MANY_REQUESTS)
+                .body(ex.getMessage());
+    }
+
 }
