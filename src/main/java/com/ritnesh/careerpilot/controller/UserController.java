@@ -1,5 +1,6 @@
 package com.ritnesh.careerpilot.controller;
 import com.ritnesh.careerpilot.dto.RegisterRequest;
+import com.ritnesh.careerpilot.dto.RegisterResponse;
 import com.ritnesh.careerpilot.entity.User;
 import com.ritnesh.careerpilot.service.UserService;
 import jakarta.validation.Valid;
@@ -19,7 +20,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public User registerUser(@RequestBody RegisterRequest request) {
+    public ResponseEntity<RegisterResponse> registerUser(@Valid @RequestBody RegisterRequest request) {
 
         User user = new User();
 
@@ -27,7 +28,17 @@ public class UserController {
         user.setEmail(request.getEmail());
         user.setPassword(request.getPassword());
 
-        return userService.registerUser(user);
+        User savedUser = userService.registerUser(user);
+
+        // Never return the raw User entity here - it carries the BCrypt password
+        // hash, and returning it would leak that hash in the API response.
+        RegisterResponse response = new RegisterResponse(
+                "User registered successfully.",
+                savedUser.getFullName(),
+                savedUser.getEmail()
+        );
+
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/login")

@@ -58,6 +58,13 @@ public class ResumeAnalysisService {
         analysis.setResume(resume);
         analysis.setStatus(ResumeAnalysis.AnalysisStatus.PENDING);
         analysis.setAnalyzedAt(LocalDateTime.now());
+        // Clear out any stale result from a previous attempt so a PENDING
+        // response never carries old failure/score data.
+        analysis.setAtsScore(null);
+        analysis.setExtractedSkillsCsv(null);
+        analysis.setSuggestionsText(null);
+        analysis.setSummary(null);
+        analysis.setFailureReason(null);
         analysis = analysisRepository.save(analysis);
 
         worker.analyze(analysis.getId(), Paths.get(resume.getFilePath()));

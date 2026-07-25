@@ -30,7 +30,7 @@ build/
 !**/src/test/**/build/
 uploads/
 *.patch
-*.zip
+*.zipx
 
 ### VS Code ###
 .vscode/

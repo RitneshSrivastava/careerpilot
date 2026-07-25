@@ -1,5 +1,6 @@
 package com.ritnesh.careerpilot.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,6 +22,10 @@ public class User {
     @Column(unique = true, nullable = false)
     private String email;
 
+    // Defense-in-depth: even though controllers now return dedicated response
+    // DTOs (never the raw entity), this ensures the password hash can never
+    // accidentally leak if a future endpoint returns a User entity directly.
+    @JsonIgnore
     private String password;
 
     @OneToMany(mappedBy = "user",
