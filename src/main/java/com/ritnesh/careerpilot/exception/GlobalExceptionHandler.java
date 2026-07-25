@@ -1,5 +1,6 @@
 package com.ritnesh.careerpilot.exception;
 
+import org.springframework.data.mapping.PropertyReferenceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -60,6 +61,17 @@ public class GlobalExceptionHandler {
         return ResponseEntity
                 .status(HttpStatus.TOO_MANY_REQUESTS)
                 .body(ex.getMessage());
+    }
+
+    @ExceptionHandler(PropertyReferenceException.class)
+    public ResponseEntity<String> handlePropertyReference(PropertyReferenceException ex) {
+
+        // Thrown when a ?sort=fieldName query param doesn't match a real field
+        // (e.g. Swagger UI's default placeholder value of "string").
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body("Invalid sort field: '" + ex.getPropertyName() +
+                        "'. Valid fields include: id, originalFileName, uploadedAt.");
     }
 
 }
