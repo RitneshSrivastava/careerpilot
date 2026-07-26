@@ -74,4 +74,12 @@ public class GlobalExceptionHandler {
                         "'. Valid fields include: id, originalFileName, uploadedAt.");
     }
 
+    @ExceptionHandler(JobNotFoundException.class)
+    public ResponseEntity<String> handleJobNotFound(JobNotFoundException ex) {
+
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(ex.getMessage());
+    }
+
 }

@@ -1,12 +1,16 @@
 package com.ritnesh.careerpilot.controller;
 
 import com.ritnesh.careerpilot.dto.PagedResponse;
+import com.ritnesh.careerpilot.dto.JobMatchResponse;
 import com.ritnesh.careerpilot.dto.ResumeAnalysisResponse;
 import com.ritnesh.careerpilot.dto.ResumeSummaryResponse;
 import com.ritnesh.careerpilot.dto.ResumeUploadResponse;
 import com.ritnesh.careerpilot.entity.Resume;
+import com.ritnesh.careerpilot.service.JobMatchingService;
 import com.ritnesh.careerpilot.service.ResumeAnalysisService;
 import com.ritnesh.careerpilot.service.ResumeService;
+
+import java.util.List;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Pageable;
@@ -30,11 +34,14 @@ public class ResumeController {
 
     private final ResumeService resumeService;
     private final ResumeAnalysisService resumeAnalysisService;
+    private final JobMatchingService jobMatchingService;
 
     public ResumeController(ResumeService resumeService,
-                             ResumeAnalysisService resumeAnalysisService) {
+                             ResumeAnalysisService resumeAnalysisService,
+                             JobMatchingService jobMatchingService) {
         this.resumeService = resumeService;
         this.resumeAnalysisService = resumeAnalysisService;
+        this.jobMatchingService = jobMatchingService;
     }
 
     @PostMapping(
@@ -146,5 +153,19 @@ public class ResumeController {
         resumeService.getDownloadableResume(id, email);
 
         return ResponseEntity.ok(resumeAnalysisService.getAnalysis(id));
+    }
+
+    @GetMapping("/{id}/job-matches")
+    public ResponseEntity<List<JobMatchResponse>> getJobMatches(
+            @PathVariable Long id,
+            Authentication authentication
+    ) {
+
+        String email = authentication.getName();
+
+        // confirms the resume exists and belongs to this user first
+        resumeService.getDownloadableResume(id, email);
+
+        return ResponseEntity.ok(jobMatchingService.getMatches(id));
     }
 }
