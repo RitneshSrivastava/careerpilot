@@ -1,5 +1,12 @@
 # CareerPilot
 
+![Java](https://img.shields.io/badge/Java-21-orange?logo=openjdk)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.1-brightgreen?logo=spring)
+![Spring AI](https://img.shields.io/badge/Spring%20AI-2.0-6DB33F?logo=spring)
+![React](https://img.shields.io/badge/React-18-61DAFB?logo=react)
+![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?logo=mysql&logoColor=white)
+![License](https://img.shields.io/badge/license-MIT-blue)
+
 An AI-powered career preparation platform. Upload a resume and get real, AI-generated ATS scoring, skill extraction, and improvement suggestions — plus resume-to-job match scoring against live listings, all behind a secure, production-shaped Spring Boot backend with a React frontend.
 
 Built to demonstrate backend engineering depth (JWT auth, layered architecture, async processing, structured error handling) alongside genuine AI integration (Spring AI + OpenAI, structured output parsing, cost-aware caching) — not just a CRUD app with an API call bolted on.
@@ -152,8 +159,15 @@ A completed analysis is reused as-is unless the resume file has been replaced si
 
 ---
 
+## License
+
+This project is licensed under the [MIT License](LICENSE) — free to use, modify, and learn from.
+
+---
+
 ## Author
 
 **Ritnesh Kumar Srivastava**
 Computer Science Engineering Graduate
-GitHub: [RitneshSrivastava](https://github.com/RitneshSrivastava)
+- GitHub: [RitneshSrivastava](https://github.com/RitneshSrivastava)
+- LinkedIn: [ritneshks](https://www.linkedin.com/in/ritneshks)
