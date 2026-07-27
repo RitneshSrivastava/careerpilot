@@ -22,11 +22,12 @@ public class EmailService {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(fromAddress);
         message.setTo(toEmail);
-        message.setSubject("Your CareerPilot verification code");
+        message.setSubject("Your CareerPilot verification code by Ritnesh Srivastava");
         message.setText(
                 "Your CareerPilot verification code is: " + otpCode +
                         "\n\nThis code expires in 10 minutes.\n\n" +
-                        "If you didn't request this, you can ignore this email."
+                        "If you didn't request this, you can ignore this email.\n\n" +
+                        "Regards Ritnesh"
         );
 
         mailSender.send(message);
