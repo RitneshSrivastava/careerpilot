@@ -77,6 +77,12 @@
 			<version>${pdfbox.version}</version>
 		</dependency>
 
+		<!-- Email (OTP verification) -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+
 		<!-- MySQL Driver -->
 		<dependency>
 			<groupId>com.mysql</groupId>

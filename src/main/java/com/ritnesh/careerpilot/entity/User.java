@@ -28,6 +28,13 @@ public class User {
     @JsonIgnore
     private String password;
 
+    @Column(nullable = false)
+    private boolean verified = false;
+
+    private String otpCode;
+
+    private java.time.LocalDateTime otpExpiry;
+
     @OneToMany(mappedBy = "user",
             cascade = CascadeType.ALL,
             orphanRemoval = true)

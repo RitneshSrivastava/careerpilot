@@ -1,6 +1,8 @@
 package com.ritnesh.careerpilot.controller;
 import com.ritnesh.careerpilot.dto.RegisterRequest;
 import com.ritnesh.careerpilot.dto.RegisterResponse;
+import com.ritnesh.careerpilot.dto.ResendOtpRequest;
+import com.ritnesh.careerpilot.dto.VerifyOtpRequest;
 import com.ritnesh.careerpilot.entity.User;
 import com.ritnesh.careerpilot.service.UserService;
 import jakarta.validation.Valid;
@@ -33,12 +35,28 @@ public class UserController {
         // Never return the raw User entity here - it carries the BCrypt password
         // hash, and returning it would leak that hash in the API response.
         RegisterResponse response = new RegisterResponse(
-                "User registered successfully.",
+                "Registered. Check your email for a verification code.",
                 savedUser.getFullName(),
                 savedUser.getEmail()
         );
 
         return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/verify")
+    public ResponseEntity<String> verifyOtp(@Valid @RequestBody VerifyOtpRequest request) {
+
+        userService.verifyOtp(request.getEmail(), request.getCode());
+
+        return ResponseEntity.ok("Account verified successfully. You can now log in.");
+    }
+
+    @PostMapping("/resend-otp")
+    public ResponseEntity<String> resendOtp(@Valid @RequestBody ResendOtpRequest request) {
+
+        userService.resendOtp(request.getEmail());
+
+        return ResponseEntity.ok("A new verification code has been sent.");
     }
 
     @PostMapping("/login")
