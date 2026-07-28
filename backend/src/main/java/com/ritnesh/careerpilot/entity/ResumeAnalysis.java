@@ -26,16 +26,16 @@ public class ResumeAnalysis {
 
     private Integer atsScore;
 
-    @Lob
+    @Column(columnDefinition = "TEXT")
     private String extractedSkillsCsv;
 
-    @Lob
+    @Column(columnDefinition = "TEXT")
     private String suggestionsText;
 
-    @Lob
+    @Column(columnDefinition = "TEXT")
     private String summary;
 
-    @Lob
+    @Column(columnDefinition = "TEXT")
     private String failureReason;
 
     private LocalDateTime analyzedAt;

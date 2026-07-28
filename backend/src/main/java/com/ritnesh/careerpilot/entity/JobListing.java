@@ -24,11 +24,11 @@ public class JobListing {
 
     private String location;
 
-    @Lob
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     // Comma-separated, same convention as ResumeAnalysis.extractedSkillsCsv
-    @Lob
+    @Column(columnDefinition = "TEXT")
     private String requiredSkillsCsv;
 
     private LocalDateTime postedAt;
