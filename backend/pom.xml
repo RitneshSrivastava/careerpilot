@@ -77,12 +77,6 @@
 			<version>${pdfbox.version}</version>
 		</dependency>
 
-		<!-- Email (OTP verification) -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-mail</artifactId>
-		</dependency>
-
 		<!-- PostgreSQL Driver -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
