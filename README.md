@@ -205,8 +205,15 @@ This project is licensed under the [MIT License](LICENSE) — free to use, modif
 ---
 
 ## Author
+---
 
-**Ritnesh Kumar Srivastava**
+<p align="center">
+### CareerPilot
+
+Built with ❤️ using **Java • Spring Boot • React • PostgreSQL • Spring AI**
+<br><br>
+Designed & Developed by **Ritnesh Kumar Srivastava**
+</p>
 Computer Science Engineering Graduate
 - GitHub: [RitneshSrivastava](https://github.com/RitneshSrivastava)
 - LinkedIn: [ritneshks](https://www.linkedin.com/in/ritneshks)
