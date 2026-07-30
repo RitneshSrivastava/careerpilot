@@ -3,6 +3,7 @@ import Login from './Login.jsx'
 import Register from './Register.jsx'
 import Verify from './Verify.jsx'
 import Dashboard from './Dashboard.jsx'
+import Footer from './Footer.jsx'
 import { api } from './api'
 
 function RequireAuth({ children }) {
@@ -50,6 +51,7 @@ export default function App() {
           }
         />
       </Routes>
+      <Footer />
     </div>
   )
 }
