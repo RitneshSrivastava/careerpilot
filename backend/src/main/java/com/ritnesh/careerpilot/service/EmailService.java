@@ -45,7 +45,7 @@ public class EmailService {
                 "textContent",
                 "Your CareerPilot verification code is: " + otpCode +
                         "\n\nThis code expires in 10 minutes.\n\n" +
-                        "If you didn't request this, you can ignore this email." +
+                        "If you didn't request this, you can ignore this email.\n\n" +
                         "Best Regards.\n\n" +
                         "Ritnesh Srivastav.\n\n"
         );
